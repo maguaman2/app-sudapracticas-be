@@ -21,11 +21,11 @@ CREATE TABLE IF NOT EXISTS  company(
 CREATE TABLE IF NOT EXISTS  tutor(
   id serial,
   name VARCHAR(45) NOT NULL,
-  email VARCHAR(45) ,
-  phone VARCHAR(12),
+  email VARCHAR(45) NOT NULL,
+  phone VARCHAR(12) NOT NULL,
   alternative VARCHAR(50),
   status BOOLEAN,
-  company_id int ,
+  company_id int NOT NULL,
   PRIMARY KEY (id),
   FOREIGN KEY (company_id) references company (id)
 );
@@ -65,20 +65,20 @@ CREATE TABLE IF NOT EXISTS  tracking(
   FOREIGN KEY (practice_id) references practice (id)
 );
 
-CREATE TABLE IF NOT EXITS carrera{
+CREATE TABLE IF NOT EXISTS carrera(
     id serial,
     name VARCHAR(50),
-    teacher_id int not null
-}
+    teacher_id int
+);
 
-CREATE TYPE tipo AS ENUM('MARCO','ESPECIFICO');
 
-CREATE TABLE IF NOT EXISTS convenio{
+
+CREATE TABLE IF NOT EXISTS convenio(
   id serial,
-  tipo tipo,
+  tipo VARCHAR(10) not null,
   fecha_firma date not null,
   fecha_vencimiento date not null,
   estado BOOLEAN,
   carrera_id int not null,
   company_id int not null
-}
+);

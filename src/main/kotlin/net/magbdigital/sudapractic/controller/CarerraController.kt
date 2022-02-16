@@ -26,7 +26,7 @@ class CarerraController {
 
     @PutMapping
     fun update(@RequestBody carrera: Carrera):Carrera{
-        return carreraService.save(carrera)
+        return carreraService.update(carrera)
     }
 
 
