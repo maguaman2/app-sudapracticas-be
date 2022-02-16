@@ -1,37 +1,37 @@
 package net.magbdigital.sudapractic.controller
-
+import net.magbdigital.sudapractic.model.Carrera
 import net.magbdigital.sudapractic.model.Student
-import net.magbdigital.sudapractic.model.Tutor
+import net.magbdigital.sudapractic.service.CarreraService
 import net.magbdigital.sudapractic.service.StudentService
-import net.magbdigital.sudapractic.service.TutorService
+
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/tutors")
+@RequestMapping("/carreras")
 @CrossOrigin(methods = [RequestMethod.GET, RequestMethod.POST, RequestMethod.PATCH, RequestMethod.PUT])
-class TutorController {
+class CarerraController {
     @Autowired
-    lateinit var tutorService: TutorService
+    lateinit var carreraService: CarreraService
 
     @GetMapping
-    fun list(): List<Tutor>{
-        return tutorService.list()
+    fun list(): List<Carrera>{
+        return carreraService.list()
     }
 
     @PostMapping
-    fun save(@RequestBody tutor:Tutor):Tutor{
-        return tutorService.save(tutor)
+    fun save(@RequestBody carrera: Carrera):Carrera{
+        return carreraService.save(carrera)
     }
 
     @PutMapping
-    fun update(@RequestBody tutor: Tutor):Tutor{
-        return tutorService.save(tutor)
+    fun update(@RequestBody carrera: Carrera):Carrera{
+        return carreraService.save(carrera)
     }
 
 
     @DeleteMapping("/delete/{id}")
     fun delete(@PathVariable("id") id:Long):Boolean{
-        return tutorService.delete(id)
+        return carreraService.delete(id)
     }
 }

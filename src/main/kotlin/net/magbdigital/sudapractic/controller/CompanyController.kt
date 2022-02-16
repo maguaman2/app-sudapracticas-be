@@ -1,5 +1,6 @@
 package net.magbdigital.sudapractic.controller
 
+import net.magbdigital.sudapractic.model.Carrera
 import net.magbdigital.sudapractic.model.Company
 import net.magbdigital.sudapractic.model.Student
 import net.magbdigital.sudapractic.service.CompanyService
@@ -22,5 +23,16 @@ class CompanyController {
     @PostMapping
     fun save(@RequestBody company:Company):Company{
         return companyService.save(company)
+    }
+
+    @PutMapping
+    fun update(@RequestBody company: Company): Company {
+        return companyService.save(company)
+    }
+
+
+    @DeleteMapping("/delete/{id}")
+    fun delete(@PathVariable("id") id:Long):Boolean{
+        return companyService.delete(id)
     }
 }

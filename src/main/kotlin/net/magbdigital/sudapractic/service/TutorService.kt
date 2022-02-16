@@ -1,8 +1,6 @@
 package net.magbdigital.sudapractic.service
 
-import net.magbdigital.sudapractic.model.Student
 import net.magbdigital.sudapractic.model.Tutor
-import net.magbdigital.sudapractic.repository.StudentRepository
 import net.magbdigital.sudapractic.repository.TutorRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -22,6 +20,20 @@ class TutorService {
             status=true
         }
         return tutorRepository.save(tutor)
+    }
+
+    fun update(tutor: Tutor):Tutor{
+        val response =tutorRepository.findById(tutor.id)
+        if (response==null){
+            throw Exception()
+        }else{
+            return tutorRepository.save(tutor)
+        }
+    }
+
+    fun delete(id:Long):Boolean{
+        tutorRepository.deleteById(id)
+        return true
     }
 }
 

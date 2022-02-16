@@ -1,5 +1,6 @@
 package net.magbdigital.sudapractic.service
 
+import net.magbdigital.sudapractic.model.Carrera
 import net.magbdigital.sudapractic.model.Company
 import net.magbdigital.sudapractic.model.Student
 import net.magbdigital.sudapractic.repository.CompanyRepository
@@ -22,6 +23,20 @@ class CompanyService {
             status=true
         }
         return companyRepository.save(company)
+    }
+
+    fun update(company: Company): Company {
+        val response =companyRepository.findById(company.id)
+        if (response==null){
+            throw Exception()
+        }else{
+            return companyRepository.save(company)
+        }
+    }
+
+    fun delete(id:Long):Boolean{
+        companyRepository.deleteById(id)
+        return true
     }
 }
 

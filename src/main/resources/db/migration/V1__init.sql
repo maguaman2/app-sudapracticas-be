@@ -64,3 +64,21 @@ CREATE TABLE IF NOT EXISTS  tracking(
   PRIMARY KEY (id),
   FOREIGN KEY (practice_id) references practice (id)
 );
+
+CREATE TABLE IF NOT EXITS carrera{
+    id serial,
+    name VARCHAR(50),
+    teacher_id int not null
+}
+
+CREATE TYPE tipo AS ENUM('MARCO','ESPECIFICO');
+
+CREATE TABLE IF NOT EXISTS convenio{
+  id serial,
+  tipo tipo,
+  fecha_firma date not null,
+  fecha_vencimiento date not null,
+  estado BOOLEAN,
+  carrera_id int not null,
+  company_id int not null
+}
