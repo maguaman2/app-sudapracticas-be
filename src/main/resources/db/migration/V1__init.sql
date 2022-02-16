@@ -71,8 +71,6 @@ CREATE TABLE IF NOT EXISTS carrera(
     teacher_id int
 );
 
-
-
 CREATE TABLE IF NOT EXISTS convenio(
   id serial,
   tipo VARCHAR(10) not null,
