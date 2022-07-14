@@ -7,10 +7,13 @@ import net.magbdigital.sudapractic.service.CompanyService
 import net.magbdigital.sudapractic.service.StudentService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
+import org.springframework.web.bind.annotation.DeleteMapping
+
 
 @RestController
+
 @RequestMapping("/companies")
-@CrossOrigin(methods = [RequestMethod.GET, RequestMethod.POST, RequestMethod.PATCH, RequestMethod.PUT])
+@CrossOrigin(methods = [RequestMethod.GET, RequestMethod.POST, RequestMethod.PATCH, RequestMethod.PUT,RequestMethod.DELETE])
 class CompanyController {
     @Autowired
     lateinit var companyService: CompanyService
@@ -18,6 +21,10 @@ class CompanyController {
     @GetMapping
     fun list(): List<Company>{
         return companyService.list()
+    }
+    @GetMapping("/{id}")
+    fun listById (@PathVariable("id") id: Long): Company?{
+        return companyService.listById(id)
     }
 
     @PostMapping

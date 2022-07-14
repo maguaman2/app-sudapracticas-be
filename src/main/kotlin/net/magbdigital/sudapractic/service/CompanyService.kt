@@ -17,6 +17,9 @@ class CompanyService {
 
         return companyRepository.findAll()
     }
+    fun listById (id:Long?):Company?{
+        return companyRepository.findById(id)
+    }
 
     fun save(company:Company):Company{
         company.apply {
