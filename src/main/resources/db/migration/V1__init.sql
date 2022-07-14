@@ -1,12 +1,22 @@
+CREATE TABLE IF NOT EXISTS career(
+    id serial,
+    name VARCHAR(50),
+    coordinator VARCHAR (50),
+    PRIMARY KEY (id),
+    teacher_id INT
+);
+
 CREATE TABLE IF NOT EXISTS  student(
-  id serial,
-  nui VARCHAR(13) NOT NULL UNIQUE,
-  name VARCHAR(45) NOT NULL,
-  lastname VARCHAR(45) NOT NULL,
-  email VARCHAR(45) NOT NULL UNIQUE,
-  phone VARCHAR(12) NOT NULL UNIQUE,
-  status BOOLEAN,
-  PRIMARY KEY (id)
+    id serial,
+    nui VARCHAR(13) NOT NULL UNIQUE,
+    name VARCHAR(45) NOT NULL,
+    lastname VARCHAR(45) NOT NULL,
+    email VARCHAR(45) NOT NULL UNIQUE,
+    phone VARCHAR(12) NOT NULL UNIQUE,
+    status BOOLEAN,
+    career_id INT,
+    PRIMARY KEY (id),
+    FOREIGN KEY (career_id) references career (id)
 );
 
 CREATE TABLE IF NOT EXISTS  company(
@@ -31,19 +41,23 @@ CREATE TABLE IF NOT EXISTS  tutor(
 );
 
 CREATE TABLE IF NOT EXISTS  teacher(
-  id serial,
-  name VARCHAR(45) NOT NULL,
-  phone VARCHAR(12),
-  status BOOLEAN,
-  PRIMARY KEY (id)
+    id serial,
+    name VARCHAR(45) NOT NULL,
+    phone VARCHAR(12),
+    status BOOLEAN,
+    career_id INT,
+    PRIMARY KEY (id),
+    FOREIGN KEY (career_id) REFERENCES career (id)
 );
+
+
+
 
 CREATE TABLE IF NOT EXISTS  practice(
   id serial,
-
   start_date date NOT NULL,
-  hours int,
   end_date date,
+  hours int,
   student_id int not null,
   tutor_id int not null,
   teacher_id int not null,
@@ -54,17 +68,28 @@ CREATE TABLE IF NOT EXISTS  practice(
   FOREIGN KEY (teacher_id) references teacher(id)
 );
 
-
-CREATE TABLE IF NOT EXISTS carrera(
+CREATE TABLE IF NOT EXISTS activity(
     id serial,
-    name VARCHAR(50),
-    teacher_id int
+    description varchar(50) not null,
+    career_id INT,
+    PRIMARY KEY (id),
+    FOREIGN KEY (career_id) REFERENCES career (id)
 );
 
-CREATE TABLE IF NOT EXISTS activities(
+
+CREATE TABLE IF NOT EXISTS practice_detail(
     id serial,
-    actividad varchar(50)not null,
-    carrer_id int,
-    estado BOOLEAN,
-    PRIMARY KEY (id)
-)
+    actual_date date not null,
+    start_time time NOT NULL,
+    end_time time NOT NULL,
+    total_hours int,
+    observations varchar (200),
+    activity_id int,
+    practice_id int,
+    PRIMARY KEY (id),
+    FOREIGN KEY (activity_id) REFERENCES activity (id),
+    FOREIGN KEY (practice_id) REFERENCES practice (id)
+);
+
+ALTER TABLE career ADD UNIQUE (teacher_id);
+ALTER TABLE career ADD FOREIGN KEY (teacher_id) REFERENCES teacher(id);
