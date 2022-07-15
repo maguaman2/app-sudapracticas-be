@@ -10,7 +10,7 @@ class CarreraView {
     @Column(updatable = false)
     var id: Long? = null
     var name:String? = null
-
+    var coordinator:String? = null
     @Column(name="teacher_id")
     var teacherId: Long? = null
     var profesor:String? = null

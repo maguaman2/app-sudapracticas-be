@@ -9,12 +9,8 @@ class Company {
     @Id
     @Column(updatable = false)
     var id: Long? = null
-
     var name:String? = null
     var phone:String? = null
     var contact:String? = null
     var status: Boolean? = null
-
-
-
 }

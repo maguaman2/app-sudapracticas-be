@@ -9,9 +9,10 @@ class Teacher {
     @Id
     @Column(updatable = false)
     var id: Long? = null
-
     var name:String? = null
     var phone:String? = null
     var status: Boolean? = null
+    @Column(name="career_id")
+    var careerId: Long? = null
 
 }

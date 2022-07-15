@@ -9,7 +9,6 @@ class Tutor {
     @Id
     @Column(updatable = false)
     var id: Long? = null
-
     var name:String? = null
     var email:String? = null
     var phone:String? = null
