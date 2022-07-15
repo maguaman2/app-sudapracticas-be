@@ -71,6 +71,7 @@ CREATE TABLE IF NOT EXISTS  practice(
 CREATE TABLE IF NOT EXISTS activity(
     id serial,
     description varchar(50) not null,
+    observation varchar (100),
     career_id INT,
     PRIMARY KEY (id),
     FOREIGN KEY (career_id) REFERENCES career (id)
