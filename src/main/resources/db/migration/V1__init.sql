@@ -91,6 +91,14 @@ CREATE TABLE IF NOT EXISTS practice_detail(
     FOREIGN KEY (activity_id) REFERENCES activity (id),
     FOREIGN KEY (practice_id) REFERENCES practice (id)
 );
+CREATE TABLE IF NOT EXISTS activity_detail(
+    id serial,
+    activity_id int,
+    detail_id int,
+    PRIMARY KEY (id),
+    FOREIGN KEY (activity_id) REFERENCES activity (id),
+    FOREIGN KEY (detail_id) REFERENCES practice_detail (id)
+);
 
 ALTER TABLE career ADD UNIQUE (teacher_id);
 ALTER TABLE career ADD FOREIGN KEY (teacher_id) REFERENCES teacher(id);

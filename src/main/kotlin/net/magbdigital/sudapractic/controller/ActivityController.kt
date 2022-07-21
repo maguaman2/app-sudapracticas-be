@@ -1,5 +1,5 @@
 package net.magbdigital.sudapractic.controller
-import net.magbdigital.sudapractic.model.*
+import net.magbdigital.sudapractic.model.Activity
 import net.magbdigital.sudapractic.service.ActivityService
 
 import org.springframework.beans.factory.annotation.Autowired
@@ -16,6 +16,7 @@ class ActivityController {
     fun list(): List<Activity>{
         return activityService.list()
     }
+
     @GetMapping("/{id}")
     fun listById (@PathVariable("id") id: Long): Activity?{
         return activityService.listById(id)

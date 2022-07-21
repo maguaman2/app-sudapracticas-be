@@ -3,14 +3,14 @@ package net.magbdigital.sudapractic.model
 import javax.persistence.*
 
 @Entity
-@Table(name="activity")
-class Activity {
+@Table(name="activity_Detail")
+class ActivityDetail {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(updatable = false)
     var id: Long? = null
-    var description:String? = null
-    var observation:String?=null
-    @Column(name="career_id")
-    var careerId: Long? = null
+    @Column(name="activity_id")
+    var activityId: Long? = null
+    @Column(name="detail_id")
+    var detailId: Long? = null
 }

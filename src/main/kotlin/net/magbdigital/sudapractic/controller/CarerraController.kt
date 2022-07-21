@@ -22,7 +22,7 @@ class CarerraController {
         return carreraService.listById(id)
     }
     @GetMapping("/with/profesor")
-    fun listProfesor(): List<CarreraView>{
+    fun listPr(): List<CarreraView>{
         return carreraService.listProfesor()
     }
 

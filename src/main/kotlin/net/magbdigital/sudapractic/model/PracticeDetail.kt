@@ -14,11 +14,11 @@ class PracticeDetail {
     @Column(name = "actual_date")
     var actualDate:Date? = null
     @Column(name = "start_time")
-    var strartTime:Time?=null
+    var startTime:Time?=null
     @Column(name = "end_time")
     var endTime:Time?=null
     @Column(name = "total_hours")
-    var totalHours:Time?=null
+    var totalHours:Long?=null
     var observations:String? = null
     @Column(name = "activity_id")
     var activityId:Long? = null
