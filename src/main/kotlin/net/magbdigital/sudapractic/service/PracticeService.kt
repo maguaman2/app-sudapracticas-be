@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service
 class PracticeService {
     @Autowired
     lateinit var practiceRepository: PracticeRepository
+    @Autowired
     lateinit var practiceViewRepository: PracticeViewRepository
 
 

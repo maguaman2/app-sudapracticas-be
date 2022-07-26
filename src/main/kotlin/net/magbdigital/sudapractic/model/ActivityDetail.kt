@@ -9,8 +9,8 @@ class ActivityDetail {
     @Id
     @Column(updatable = false)
     var id: Long? = null
-    @Column(name="activity_id")
-    var activityId: Long? = null
+    @Column(name="activities_id")
+    var activitiesId: Long? = null
     @Column(name="detail_id")
     var detailId: Long? = null
 }

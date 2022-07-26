@@ -17,13 +17,16 @@ class PracticeView {
     var hours:Long? = null
     @Column(name = "student_id")
     var studentId:Long? = null
+    var estudiante:String? = null
     @Column(name = "tutor_id")
     var tutorId:Long? = null
+    var tutor:String? = null
     @Column(name = "teacher_id")
     var teacherId:Long? = null
-    var status: Boolean? = null
-    var estudiante:String? = null
     var profesor:String? = null
-    var tutor:String? = null
+    var status: Boolean? = null
+
+
+
 
 }

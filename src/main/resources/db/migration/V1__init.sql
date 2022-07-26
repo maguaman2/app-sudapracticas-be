@@ -85,18 +85,16 @@ CREATE TABLE IF NOT EXISTS practice_detail(
     end_time time NOT NULL,
     total_hours int,
     observations varchar (200),
-    activity_id int,
     practice_id int,
     PRIMARY KEY (id),
-    FOREIGN KEY (activity_id) REFERENCES activity (id),
     FOREIGN KEY (practice_id) REFERENCES practice (id)
 );
 CREATE TABLE IF NOT EXISTS activity_detail(
     id serial,
-    activity_id int,
+    activities_id int,
     detail_id int,
     PRIMARY KEY (id),
-    FOREIGN KEY (activity_id) REFERENCES activity (id),
+    FOREIGN KEY (activities_id) REFERENCES activity (id),
     FOREIGN KEY (detail_id) REFERENCES practice_detail (id)
 );
 

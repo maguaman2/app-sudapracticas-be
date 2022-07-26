@@ -20,8 +20,6 @@ class PracticeDetail {
     @Column(name = "total_hours")
     var totalHours:Long?=null
     var observations:String? = null
-    @Column(name = "activity_id")
-    var activityId:Long? = null
     @Column(name = "practice_id")
     var practiceId:Long? = null
 }

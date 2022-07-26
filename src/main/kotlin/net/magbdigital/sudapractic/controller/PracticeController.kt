@@ -22,7 +22,7 @@ class PracticeController {
         return practiceService.listById(id)
     }
     @GetMapping("/with/estudiante")
-    fun listEstudiante(): List<PracticeView>{
+    fun listEst(): List<PracticeView>{
         return practiceService.listEstudiante()
     }
     @PostMapping
