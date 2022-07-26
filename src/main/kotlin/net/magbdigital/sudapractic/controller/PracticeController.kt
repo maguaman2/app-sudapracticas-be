@@ -17,6 +17,11 @@ class PracticeController {
     fun list(): List<Practice>{
         return practiceService.list()
     }
+
+    @GetMapping("/{studentId}/student")
+    fun listByStudent(@PathVariable("studentId") studentId: Long): List<Practice>{
+        return practiceService.listByStudent (studentId)
+    }
     @GetMapping("/{id}")
     fun listById (@PathVariable("id") id: Long): Practice?{
         return practiceService.listById(id)

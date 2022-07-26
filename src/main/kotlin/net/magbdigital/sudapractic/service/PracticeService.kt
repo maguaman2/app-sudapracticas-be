@@ -29,6 +29,9 @@ class PracticeService {
     fun listById (id:Long?): Practice?{
         return practiceRepository.findById(id)
     }
+    fun listByStudent (studentId:Long): List<Practice>{
+        return practiceRepository.listPracticeByStudent(studentId)
+    }
 
     fun save(practice:Practice):Practice{
         return practiceRepository.save(practice)
