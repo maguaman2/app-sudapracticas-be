@@ -29,11 +29,12 @@ class PracticeService {
     fun listById (id:Long?): Practice?{
         return practiceRepository.findById(id)
     }
-    fun listByStudent (studentId:Long): List<Practice>{
-        return practiceRepository.listPracticeByStudent(studentId)
+    fun listByStudent (studentId:Long): List<PracticeView>{
+        return practiceViewRepository.listPracticeByStudent(studentId)
     }
 
     fun save(practice:Practice):Practice{
+        practice.apply { status=true }
         return practiceRepository.save(practice)
     }
     fun update(practice:Practice):Practice {
