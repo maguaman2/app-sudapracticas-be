@@ -23,9 +23,9 @@ class PracticeDetailController {
     fun listById (@PathVariable("id") id: Long): PracticeDetail?{
         return practiceDetailService.listById(id)
     }
-    @GetMapping("/{studentId}/student")
-    fun listpractica(@PathVariable("studentId") studentId:Long): List<PracticeDetail>{
-        return practiceDetailService.listaPractica(studentId)
+    @GetMapping("/{practiceId}/practice")
+    fun listpractica(@PathVariable("practiceId") practiceId:Long): List<PracticeDetail>{
+        return practiceDetailService.listDetailByPractice(practiceId)
     }
 
     @PostMapping

@@ -16,8 +16,8 @@ class PracticeDetailService {
 
         return practiceDetailRepository.findAll()
     }
-    fun listaPractica (studentId:Long): List<PracticeDetail>{
-        return practiceDetailRepository.listaPractica(studentId)
+    fun listDetailByPractice (practiceId:Long): List<PracticeDetail>{
+        return practiceDetailRepository.listDetailByPractice(practiceId)
     }
 
 

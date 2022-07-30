@@ -9,6 +9,6 @@ import org.springframework.data.repository.query.Param
 interface PracticeDetailRepository: JpaRepository<PracticeDetail, Long?> {
     fun findById(id: Long?): PracticeDetail?
     @Query(nativeQuery = true)
-    fun listaPractica (@Param("studentId") studentId:Long): List<PracticeDetail>
+    fun listDetailByPractice (@Param("practiceId") practiceId:Long): List<PracticeDetail>
 
 }
