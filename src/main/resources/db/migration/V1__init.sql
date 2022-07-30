@@ -86,6 +86,7 @@ CREATE TABLE IF NOT EXISTS practice_detail(
     total_hours int,
     observations varchar (200),
     practice_id int,
+    student int,
     PRIMARY KEY (id),
     FOREIGN KEY (practice_id) REFERENCES practice (id)
 );

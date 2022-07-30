@@ -17,6 +17,10 @@ class ActivityDetailService {
         return activitydetailRepository.findById(id)
     }
 
+    fun listDetailId (detailId:Long): List<ActivityDetail>{
+        return activitydetailRepository.listDetailId(detailId)
+    }
+
     fun save(ActivityDetail: ActivityDetail):ActivityDetail{
         return activitydetailRepository.save(ActivityDetail)
     }

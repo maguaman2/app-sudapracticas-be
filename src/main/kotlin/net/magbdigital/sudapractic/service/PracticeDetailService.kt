@@ -1,5 +1,6 @@
 package net.magbdigital.sudapractic.service
 
+import net.magbdigital.sudapractic.model.ActivityDetail
 import net.magbdigital.sudapractic.model.PracticeDetail
 import net.magbdigital.sudapractic.repository.PracticeDetailRepository
 import org.springframework.beans.factory.annotation.Autowired
@@ -15,6 +16,10 @@ class PracticeDetailService {
 
         return practiceDetailRepository.findAll()
     }
+    fun listaPractica (studentId:Long): List<PracticeDetail>{
+        return practiceDetailRepository.listaPractica(studentId)
+    }
+
 
 
     fun listById (id:Long?): PracticeDetail?{

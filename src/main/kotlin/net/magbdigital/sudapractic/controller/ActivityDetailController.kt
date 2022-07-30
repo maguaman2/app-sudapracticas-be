@@ -18,7 +18,10 @@ class ActivityDetailController {
     fun list(): List<ActivityDetail>{
         return activityDetailService.list()
     }
-
+    @GetMapping("/{detailId}/detail")
+    fun listActivities(@PathVariable("detailId") detailId:Long): List<ActivityDetail>{
+        return activityDetailService.listDetailId(detailId)
+    }
     @GetMapping("/{id}")
     fun listById (@PathVariable("id") id: Long): ActivityDetail?{
         return activityDetailService.listById(id)

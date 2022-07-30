@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/practicedetail")
+
 @CrossOrigin(methods = [RequestMethod.GET, RequestMethod.POST, RequestMethod.PATCH, RequestMethod.PUT,RequestMethod.DELETE])
 class PracticeDetailController {
     @Autowired
@@ -21,6 +22,10 @@ class PracticeDetailController {
     @GetMapping("/{id}")
     fun listById (@PathVariable("id") id: Long): PracticeDetail?{
         return practiceDetailService.listById(id)
+    }
+    @GetMapping("/{studentId}/student")
+    fun listpractica(@PathVariable("studentId") studentId:Long): List<PracticeDetail>{
+        return practiceDetailService.listaPractica(studentId)
     }
 
     @PostMapping
