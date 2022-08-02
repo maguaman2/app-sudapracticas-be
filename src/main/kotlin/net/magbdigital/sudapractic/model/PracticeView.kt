@@ -24,7 +24,9 @@ class PracticeView {
     @Column(name = "teacher_id")
     var teacherId:Long? = null
     var profesor:String? = null
+    var empresa:String?=null
     var status: Boolean? = null
+
 
 
 

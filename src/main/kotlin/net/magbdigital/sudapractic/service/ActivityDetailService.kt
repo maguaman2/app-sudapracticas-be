@@ -1,5 +1,4 @@
 package net.magbdigital.sudapractic.service
-import net.magbdigital.sudapractic.model.Activity
 import net.magbdigital.sudapractic.model.ActivityDetail
 import net.magbdigital.sudapractic.repository.ActivityDetailRepository
 import org.springframework.beans.factory.annotation.Autowired
@@ -9,6 +8,7 @@ import org.springframework.stereotype.Service
 class ActivityDetailService {
     @Autowired
     lateinit var activitydetailRepository: ActivityDetailRepository
+
     fun list(): List<ActivityDetail> {
         return activitydetailRepository.findAll()
         //return carreraRepository.findAll()
@@ -20,7 +20,10 @@ class ActivityDetailService {
     fun listDetailId (detailId:Long): List<ActivityDetail>{
         return activitydetailRepository.listDetailId(detailId)
     }
-
+    /*
+    fun listActivities (activitiesId:Long): List<ActivityDetailView>{
+        return activitydetailViewRepository.listbyactivities(activitiesId)
+    }*/
     fun save(ActivityDetail: ActivityDetail):ActivityDetail{
         return activitydetailRepository.save(ActivityDetail)
     }
