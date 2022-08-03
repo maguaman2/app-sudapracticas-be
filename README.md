@@ -3,15 +3,16 @@ https://www.getpostman.com/collections/45a8b933525dd4c05f40
 
 v2_view.sql
 ------------------------
-
+```
 CREATE VIEW activity_detail_view as
   select ad.*,a.description actividad
   from activity_detail ad JOIN activity a ON ad.activities_id = a.id;
-
+```
 
 modelo 
 ActivityDetailView
 --------------
+```
 @Entity
 @Table(name="activity_detail_view")
 class ActivityDetailView {
@@ -25,22 +26,24 @@ class ActivityDetailView {
     var detailId: Long? = null
     var actividad: String? = null
 }
-
+```
 
 repository
 ActivityDetailViewRepository
 --------
+```
 interface ActivityDetailViewRepository: JpaRepository<ActivityDetailView, Long?> {
     fun findById(id: Long?): ActivityDetailView?
     @Query(nativeQuery = true)
     fun listDetailActivity (@Param("detailId") detailId:Long): List<ActivityDetailView>
 
 }
-
+```
 agregar al servicio
 ActivityDetailService
 --------------------------
-    @Autowired
+```
+  @Autowired
     lateinit var activityDetailViewRepository: ActivityDetailViewRepository
     
        fun listActivitiesDetailFull (detailId:Long): List<ActivityDetailView>{
@@ -56,5 +59,5 @@ ActivityDetailService
         return activityDetailService.listActivitiesDetailFull(detailId)
     }
 
-
+```
 
