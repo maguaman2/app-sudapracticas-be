@@ -49,11 +49,12 @@ ActivityDetailService
        fun listActivitiesDetailFull (detailId:Long): List<ActivityDetailView>{
         return activityDetailViewRepository.listDetailActivity(detailId)
     }
-    
+```    
     
     Agregar al controller
     ActivityDetailController
     -----------------
+```    
        @GetMapping("/{detailId}/full")
     fun listFull(@PathVariable("detailId") detailId:Long): List<ActivityDetailView>{
         return activityDetailService.listActivitiesDetailFull(detailId)
