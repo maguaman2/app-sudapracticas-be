@@ -14,11 +14,9 @@ CREATE VIEW practice_view as
                     JOIN tutor tu ON p.tutor_id =tu.id
                     JOIN student s ON p.student_id =s.id
                     JOIN company c ON c.id=tu.company_id;
---CREATE VIEW activity_view as
-  --  select ac.*,a.description descripcion
-    --from activity_detail ac JOIN activity a
-    --ON ac.activities_id=a.id*/>
-
+CREATE VIEW activity_detail_view as
+  select ad.*,a.description actividad
+ from activity_detail ad JOIN activity a ON ad.activities_id = a.id;
 
 
 

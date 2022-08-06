@@ -1,5 +1,6 @@
 package net.magbdigital.sudapractic.controller
 import net.magbdigital.sudapractic.model.ActivityDetail
+import net.magbdigital.sudapractic.model.ActivityDetailView
 import net.magbdigital.sudapractic.service.ActivityDetailService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
@@ -20,10 +21,10 @@ class ActivityDetailController {
         return activityDetailService.listDetailId(detailId)
     }
     /*--------------lista*/
-   /* @GetMapping("/{detailId}/detail")
-    fun listByActiviti(@PathVariable("activitiesId") activitiesId:Long): List<ActivityDetailView>{
-        return activityDetailService.listActivities(activitiesId)
-    }*/
+    @GetMapping("/{detailId}/full")
+    fun listFull(@PathVariable("detailId") detailId:Long): List<ActivityDetailView>{
+        return activityDetailService.listActivitiesDetailFull(detailId)
+    }
 
 
     @GetMapping("/{id}")

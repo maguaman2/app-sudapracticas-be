@@ -26,9 +26,4 @@ class PracticeView {
     var profesor:String? = null
     var empresa:String?=null
     var status: Boolean? = null
-
-
-
-
-
 }
