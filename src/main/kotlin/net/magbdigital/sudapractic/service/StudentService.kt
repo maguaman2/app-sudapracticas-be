@@ -1,6 +1,8 @@
 package net.magbdigital.sudapractic.service
 
 import net.magbdigital.sudapractic.dto.DatosReporteDto
+import net.magbdigital.sudapractic.dto.DetalleReporteDto
+import net.magbdigital.sudapractic.dto.actividadesDto
 import net.magbdigital.sudapractic.model.*
 import net.magbdigital.sudapractic.repository.*
 import org.hibernate.annotations.LazyToOne
@@ -20,6 +22,8 @@ class StudentService {
 
     @Autowired
     lateinit var detallePracticeRepository: PracticeDetailRepository
+    @Autowired
+    lateinit var actividadRepositoy:ActivityDetailViewRepository
 
     fun list(): List<Student> {
 
@@ -57,8 +61,10 @@ class StudentService {
 
     fun datosReporte(idStudent: Long, idTutor: Long): DatosReporteDto {
         var student: Student = studentRepository.findById(idStudent).get()
-        var practiceView:PracticeView=practiceViewRepository.findById(idStudent).get()
+        var practiceView:PracticeView=practiceViewRepository.findByStudentIdAndTutorId(idStudent,idTutor)
         var studentView:StudentView=studentViewRepository.findById(idStudent).get()
+        var practiceDetail:PracticeDetail=detallePracticeRepository.findById(idStudent).get()
+        var activityDetail:ActivityDetailView=actividadRepositoy.findById(idStudent).get()
 
 
         var datosReporteDto: DatosReporteDto = DatosReporteDto()
@@ -67,12 +73,21 @@ class StudentService {
         datosReporteDto.identificaciob = student.nui.toString()
         datosReporteDto.nombreCarrera= studentView.carrera+" "
         datosReporteDto.nombreInstirucionBeneficiaria=practiceView.empresa+" "
+        datosReporteDto.inicioSemana=practiceView.startDate.toString()
+        datosReporteDto.finSemana=practiceView.endDate.toString()
+        var detalleReporteDto:DetalleReporteDto=DetalleReporteDto()
+        detalleReporteDto.horaEntrada=practiceDetail.startTime.toString()
+        detalleReporteDto.horaSalida=practiceDetail.endTime.toString()
+        detalleReporteDto.horaSalida=practiceDetail.observations+" "
+        var ActividadesDto:actividadesDto=actividadesDto()
+        ActividadesDto.nombreActividad=activityDetail.actividad+" "
+
 
         //cargar datos practica
-        var practice: Practice = practiceRepository.findByStudentIdAndTutorId(idStudent, idTutor)
+        //var practice: Practice = practiceRepository.findByStudentIdAndTutorId(idStudent, idTutor)
 
 
-        var detailPractice = practice.id?.let { detallePracticeRepository.listDetailByPractice(it.toLong()) }
+        //var detailPractice = practice.id?.let { detallePracticeRepository.listDetailByPractice(it.toLong()) }
 
 
         return datosReporteDto

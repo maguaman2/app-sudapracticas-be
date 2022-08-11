@@ -12,4 +12,5 @@ class DatosReporteDto {
 
     var detalleReporte: DetalleReporteDto = DetalleReporteDto()
 
+
 }

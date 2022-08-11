@@ -12,4 +12,6 @@ interface PracticeViewRepository: JpaRepository<PracticeView, Long?> {
     fun findById(id: Long?): PracticeView?
     @Query(nativeQuery = true)
     fun listPracticeByStudent (@Param("studentId") studentId:Long): List<PracticeView>
+
+    fun findByStudentIdAndTutorId(studentId: Long, tutorId: Long): PracticeView
 }
