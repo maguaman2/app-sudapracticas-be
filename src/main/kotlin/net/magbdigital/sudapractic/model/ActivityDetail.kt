@@ -11,6 +11,7 @@ class ActivityDetail {
     var id: Long? = null
     @Column(name="activities_id")
     var activitiesId: Long? = null
+
     @Column(name="detail_id")
     var detailId: Long? = null
 }

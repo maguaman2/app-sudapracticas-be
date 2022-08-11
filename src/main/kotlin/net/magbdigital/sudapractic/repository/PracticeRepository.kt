@@ -7,7 +7,9 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.query.Param
 
-interface PracticeRepository: JpaRepository<Practice, Long?> {
+interface PracticeRepository : JpaRepository<Practice, Long?> {
     fun findById(id: Long?): Practice?
+
+    fun findByStudentIdAndTutorId(studentId: Long, tutorId: Long): Practice
 
 }

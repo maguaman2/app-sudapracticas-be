@@ -33,6 +33,7 @@ class PracticeService {
         return practiceViewRepository.listPracticeByStudent(studentId)
     }
 
+
     fun save(practice:Practice):Practice{
         practice.apply { status=true }
         return practiceRepository.save(practice)

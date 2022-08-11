@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS  student(
     email VARCHAR(45) NOT NULL UNIQUE,
     phone VARCHAR(12) NOT NULL UNIQUE,
     status BOOLEAN,
-    career_id INT,
+    career_id INT NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (career_id) references career (id)
 );

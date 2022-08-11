@@ -10,7 +10,6 @@ import org.springframework.data.repository.query.Param
 
 interface PracticeViewRepository: JpaRepository<PracticeView, Long?> {
     fun findById(id: Long?): PracticeView?
-
     @Query(nativeQuery = true)
     fun listPracticeByStudent (@Param("studentId") studentId:Long): List<PracticeView>
 }

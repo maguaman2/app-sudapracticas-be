@@ -23,4 +23,5 @@ class Practice {
     var teacherId:Long? = null
     var status: Boolean? = null
 
+
 }

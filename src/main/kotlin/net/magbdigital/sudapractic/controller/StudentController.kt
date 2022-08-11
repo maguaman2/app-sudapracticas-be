@@ -1,7 +1,6 @@
 package net.magbdigital.sudapractic.controller
-
-import net.magbdigital.sudapractic.model.Carrera
-import net.magbdigital.sudapractic.model.Student
+import net.magbdigital.sudapractic.dto.DatosReporteDto
+import net.magbdigital.sudapractic.model.*
 import net.magbdigital.sudapractic.service.StudentService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
@@ -14,27 +13,38 @@ class StudentController {
     lateinit var studentService: StudentService
 
     @GetMapping
-    fun list(): List<Student>{
+    fun list(): List<Student> {
         return studentService.list()
     }
+
     @GetMapping("/{id}")
-    fun listById (@PathVariable("id") id: Long): Student?{
+    fun listById(@PathVariable("id") id: Long): Student? {
         return studentService.listById(id)
+    }
+    @GetMapping("/with/carrera")
+    fun listCarrera(): List<StudentView>{
+        return studentService.listByEstudiante()
     }
 
 
     @PostMapping
-    fun save(@RequestBody student:Student):Student{
+    fun save(@RequestBody student: Student): Student {
         return studentService.save(student)
     }
+
     @PutMapping
-    fun update(@RequestBody student:Student):Student{
+    fun update(@RequestBody student: Student): Student {
         return studentService.update(student)
     }
 
 
     @DeleteMapping("/delete/{id}")
-    fun delete(@PathVariable("id") id:Long):Boolean{
+    fun delete(@PathVariable("id") id: Long): Boolean {
         return studentService.delete(id)
+    }
+
+    @GetMapping("/{idStudent}/{idTutor}")
+    fun cargarReporte(@PathVariable("idStudent") idStudent: Long, @PathVariable("idTutor") idTutor: Long): DatosReporteDto? {
+        return studentService.datosReporte(idStudent, idTutor)
     }
 }

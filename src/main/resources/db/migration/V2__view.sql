@@ -2,6 +2,10 @@ CREATE VIEW tutor_view as
     select t.*,c.name empresa
     from tutor t JOIN company c
     ON t.company_id = c.id;
+CREATE VIEW student_view as
+    select s.*,ca.name carrera
+    from student s JOIN career ca
+    ON s.career_id=ca.id;
 
 CREATE VIEW carrera_view as
     select c.*,t.name profesor
