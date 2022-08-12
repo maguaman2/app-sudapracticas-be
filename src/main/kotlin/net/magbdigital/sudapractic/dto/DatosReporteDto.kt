@@ -1,4 +1,7 @@
 package net.magbdigital.sudapractic.dto
+
+import net.magbdigital.sudapractic.model.PracticeDetail
+
 class DatosReporteDto {
     var nombreCompleto: String = ""
     var identificaciob: String = ""
@@ -9,8 +12,5 @@ class DatosReporteDto {
     var finSemana: String = ""
     var nombreMesTexto: String = ""
     var anio: String = ""
-
-    var detalleReporte: DetalleReporteDto = DetalleReporteDto()
-
-
+    var detalleReporte: ArrayList<DetalleReporteDto> = ArrayList();
 }

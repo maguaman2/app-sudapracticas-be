@@ -5,31 +5,39 @@ import net.magbdigital.sudapractic.dto.DetalleReporteDto
 import net.magbdigital.sudapractic.dto.actividadesDto
 import net.magbdigital.sudapractic.model.*
 import net.magbdigital.sudapractic.repository.*
-import org.hibernate.annotations.LazyToOne
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import java.text.SimpleDateFormat
 
 @Service
 class StudentService {
     @Autowired
     lateinit var studentRepository: StudentRepository
+
     @Autowired
     lateinit var practiceRepository: PracticeRepository
+
     @Autowired
     lateinit var practiceViewRepository: PracticeViewRepository
     @Autowired
-    lateinit var studentViewRepository:StudentViewRepository
+    lateinit var activitieDetailWievRepository: ActivityDetailViewRepository
 
     @Autowired
-    lateinit var detallePracticeRepository: PracticeDetailRepository
+    lateinit var activitieDetailRepository: ActivityDetailRepository
+
+
     @Autowired
-    lateinit var actividadRepositoy:ActivityDetailViewRepository
+    lateinit var studentViewRepository: StudentViewRepository
+
+    @Autowired
+    lateinit var practiceDetailRepository: PracticeDetailRepository
 
     fun list(): List<Student> {
 
         return studentRepository.findAll()
     }
-    fun listByEstudiante (): List<StudentView>{
+
+    fun listByEstudiante(): List<StudentView> {
         return studentViewRepository.findAll()
     }
 
@@ -58,38 +66,58 @@ class StudentService {
         return true
     }
 
-
     fun datosReporte(idStudent: Long, idTutor: Long): DatosReporteDto {
-        var student: Student = studentRepository.findById(idStudent).get()
-        var practiceView:PracticeView=practiceViewRepository.findByStudentIdAndTutorId(idStudent,idTutor)
-        var studentView:StudentView=studentViewRepository.findById(idStudent).get()
-        var practiceDetail:PracticeDetail=detallePracticeRepository.findById(idStudent).get()
-        var activityDetail:ActivityDetailView=actividadRepositoy.findById(idStudent).get()
 
+        var student: Student = studentRepository.findById(idStudent).get()
+        var studentView: StudentView = studentViewRepository.findById(idStudent).get()
+
+        var practiceView: PracticeView = practiceViewRepository.findByStudentIdAndTutorId(idStudent, idTutor)
+        var practiceDetaili: PracticeDetail =practiceDetailRepository.findByStudentIdAndTutorId(idStudent,idTutor)
+
+        var practiceDetail: List<PracticeDetail>? = practiceView.id?.let { practiceDetailRepository.findByPracticeId(it) }
+        var activitiesDetailView:List<ActivityDetailView>?=practiceDetaili.id?.let {activitieDetailWievRepository.findByDetailId(it)}
 
         var datosReporteDto: DatosReporteDto = DatosReporteDto()
+        var ActividadesDto:actividadesDto= actividadesDto()
 
         datosReporteDto.nombreCompleto = student.name + " " + student.lastname
         datosReporteDto.identificaciob = student.nui.toString()
-        datosReporteDto.nombreCarrera= studentView.carrera+" "
-        datosReporteDto.nombreInstirucionBeneficiaria=practiceView.empresa+" "
-        datosReporteDto.inicioSemana=practiceView.startDate.toString()
-        datosReporteDto.finSemana=practiceView.endDate.toString()
-        var detalleReporteDto:DetalleReporteDto=DetalleReporteDto()
-        detalleReporteDto.horaEntrada=practiceDetail.startTime.toString()
-        detalleReporteDto.horaSalida=practiceDetail.endTime.toString()
-        detalleReporteDto.horaSalida=practiceDetail.observations+" "
-        var ActividadesDto:actividadesDto=actividadesDto()
-        ActividadesDto.nombreActividad=activityDetail.actividad+" "
+        datosReporteDto.nombreCarrera = studentView.carrera + " "
+        datosReporteDto.nombreInstirucionBeneficiaria = practiceView.empresa + " "
+
+        var simpleDateFormat = SimpleDateFormat("LLLL")
+        var dateTime = simpleDateFormat.format(practiceView.startDate).toString()
+        datosReporteDto.nombreMesTexto = dateTime.toString()
+
+        datosReporteDto.inicioSemana = practiceView.startDate?.day.toString()
+        datosReporteDto.finSemana = practiceView.endDate?.day.toString()
+
+        if (practiceDetail != null) {
+            simpleDateFormat = SimpleDateFormat("dd-MM-yyyy")
+
+            practiceDetail.forEach { pdetail ->
+                var detalleReporteDto = DetalleReporteDto()
+                println(pdetail.observations)
+                detalleReporteDto.id = pdetail.id
+                detalleReporteDto.fechaDeActividad = simpleDateFormat.format(pdetail.actualDate)
+                detalleReporteDto.horaEntrada = pdetail.startTime.toString()
+                detalleReporteDto.horaSalida = pdetail.endTime.toString()
+                detalleReporteDto.totalHoras = pdetail.totalHours.toString()
+                detalleReporteDto.observacion = pdetail.observations.toString()
+                datosReporteDto.detalleReporte.add(detalleReporteDto)
+                if(activitiesDetailView!=null){
+                    activitiesDetailView.forEach{adetailview->
+                        var ActividadesDto=actividadesDto()
+                        println(adetailview.actividad)
+                        ActividadesDto.nombreActividad=adetailview.actividad.toString()
+                        detalleReporteDto.actividadReporte.add(ActividadesDto)
+                    }
+                }
 
 
-        //cargar datos practica
-        //var practice: Practice = practiceRepository.findByStudentIdAndTutorId(idStudent, idTutor)
 
-
-        //var detailPractice = practice.id?.let { detallePracticeRepository.listDetailByPractice(it.toLong()) }
-
-
+            }
+        }
         return datosReporteDto
     }
 
