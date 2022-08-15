@@ -2,7 +2,6 @@ package net.magbdigital.sudapractic.service
 
 import net.magbdigital.sudapractic.dto.DatosReporteDto
 import net.magbdigital.sudapractic.dto.DetalleReporteDto
-import net.magbdigital.sudapractic.dto.actividadesDto
 import net.magbdigital.sudapractic.model.*
 import net.magbdigital.sudapractic.repository.*
 import org.springframework.beans.factory.annotation.Autowired
@@ -19,18 +18,15 @@ class StudentService {
 
     @Autowired
     lateinit var practiceViewRepository: PracticeViewRepository
-    @Autowired
-    lateinit var activitieDetailWievRepository: ActivityDetailViewRepository
-
-    @Autowired
-    lateinit var activitieDetailRepository: ActivityDetailRepository
-
 
     @Autowired
     lateinit var studentViewRepository: StudentViewRepository
 
     @Autowired
     lateinit var practiceDetailRepository: PracticeDetailRepository
+@Autowired
+lateinit var activityDetailViewRepository: ActivityDetailViewRepository
+
 
     fun list(): List<Student> {
 
@@ -72,13 +68,12 @@ class StudentService {
         var studentView: StudentView = studentViewRepository.findById(idStudent).get()
 
         var practiceView: PracticeView = practiceViewRepository.findByStudentIdAndTutorId(idStudent, idTutor)
-        var practiceDetaili: PracticeDetail =practiceDetailRepository.findByStudentIdAndTutorId(idStudent,idTutor)
+        var listActivities:List<ActivityDetailView>?=activityDetailViewRepository.listDetailActivity(practiceView.id!!)
+
 
         var practiceDetail: List<PracticeDetail>? = practiceView.id?.let { practiceDetailRepository.findByPracticeId(it) }
-        var activitiesDetailView:List<ActivityDetailView>?=practiceDetaili.id?.let {activitieDetailWievRepository.findByDetailId(it)}
 
         var datosReporteDto: DatosReporteDto = DatosReporteDto()
-        var ActividadesDto:actividadesDto= actividadesDto()
 
         datosReporteDto.nombreCompleto = student.name + " " + student.lastname
         datosReporteDto.identificaciob = student.nui.toString()
@@ -105,19 +100,9 @@ class StudentService {
                 detalleReporteDto.totalHoras = pdetail.totalHours.toString()
                 detalleReporteDto.observacion = pdetail.observations.toString()
                 datosReporteDto.detalleReporte.add(detalleReporteDto)
-                if(activitiesDetailView!=null){
-                    activitiesDetailView.forEach{adetailview->
-                        var ActividadesDto=actividadesDto()
-                        println(adetailview.actividad)
-                        ActividadesDto.nombreActividad=adetailview.actividad.toString()
-                        detalleReporteDto.actividadReporte.add(ActividadesDto)
-                    }
-                }
-
-
-
             }
         }
+        datosReporteDto.listActivities=listActivities
         return datosReporteDto
     }
 

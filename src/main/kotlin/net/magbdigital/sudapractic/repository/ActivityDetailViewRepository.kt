@@ -13,9 +13,4 @@ interface ActivityDetailViewRepository: JpaRepository<ActivityDetailView, Long?>
     @Query(nativeQuery = true)
     fun listDetailActivity (@Param("detailId") detailId:Long): List<ActivityDetailView>
 
-    fun findByDetailId (@Param("detailId") detailId:Long): List<ActivityDetailView>
-    fun findByStudentIdAndTutorId(studentId: Long, tutorId: Long): ActivityDetailView
-
-
-
 }

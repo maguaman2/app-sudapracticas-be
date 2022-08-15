@@ -87,8 +87,11 @@ CREATE TABLE IF NOT EXISTS practice_detail(
     observations varchar (200),
     practice_id int,
     student int,
+    tutor int,
     PRIMARY KEY (id),
-    FOREIGN KEY (practice_id) REFERENCES practice (id)
+    FOREIGN KEY (practice_id) REFERENCES practice (id),
+    FOREIGN KEY (student) REFERENCES student(id),
+    FOREIGN KEY (tutor) REFERENCES tutor(id)
 );
 CREATE TABLE IF NOT EXISTS activity_detail(
     id serial,

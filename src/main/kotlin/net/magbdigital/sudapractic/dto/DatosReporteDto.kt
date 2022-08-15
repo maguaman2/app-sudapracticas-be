@@ -1,5 +1,6 @@
 package net.magbdigital.sudapractic.dto
 
+import net.magbdigital.sudapractic.model.ActivityDetailView
 import net.magbdigital.sudapractic.model.PracticeDetail
 
 class DatosReporteDto {
@@ -13,4 +14,7 @@ class DatosReporteDto {
     var nombreMesTexto: String = ""
     var anio: String = ""
     var detalleReporte: ArrayList<DetalleReporteDto> = ArrayList();
+    var listActivities: List<ActivityDetailView> = List()
+
+
 }

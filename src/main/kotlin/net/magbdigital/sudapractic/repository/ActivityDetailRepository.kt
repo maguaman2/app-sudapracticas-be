@@ -2,7 +2,6 @@ package net.magbdigital.sudapractic.repository
 
 import net.magbdigital.sudapractic.model.Activity
 import net.magbdigital.sudapractic.model.ActivityDetail
-import net.magbdigital.sudapractic.model.PracticeDetail
 import net.magbdigital.sudapractic.model.PracticeView
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
@@ -12,8 +11,5 @@ interface ActivityDetailRepository: JpaRepository<ActivityDetail, Long?> {
     fun findById(id: Long?): ActivityDetail?
     @Query(nativeQuery = true)
     fun listDetailId (@Param("detailId") detailId:Long): List<ActivityDetail>
-
-    fun findByDetailId (@Param("detailId") detailId:Long): List<ActivityDetail>
-
 
 }

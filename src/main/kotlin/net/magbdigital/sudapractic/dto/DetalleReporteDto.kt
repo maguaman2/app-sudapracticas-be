@@ -10,7 +10,6 @@ class DetalleReporteDto {
     var horaSalida: String = ""
     var totalHoras: String = ""
     var observacion: String = ""
-    var actividadReporte:ArrayList<actividadesDto> = ArrayList();
 
     fun ordenarDatos() {
 
