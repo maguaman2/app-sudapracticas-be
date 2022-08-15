@@ -14,7 +14,9 @@ class DatosReporteDto {
     var nombreMesTexto: String = ""
     var anio: String = ""
     var detalleReporte: ArrayList<DetalleReporteDto> = ArrayList();
-    var listActivities: List<ActivityDetailView> = List()
+    var listActivities: List<ActivityDetailView> = ArrayList();
+
+
 
 
 }

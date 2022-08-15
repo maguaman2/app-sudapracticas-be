@@ -102,7 +102,9 @@ lateinit var activityDetailViewRepository: ActivityDetailViewRepository
                 datosReporteDto.detalleReporte.add(detalleReporteDto)
             }
         }
-        datosReporteDto.listActivities=listActivities
+        if (listActivities != null) {
+            datosReporteDto.listActivities=listActivities
+        }
         return datosReporteDto
     }
 
