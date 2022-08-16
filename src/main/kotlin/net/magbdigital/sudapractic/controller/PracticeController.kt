@@ -1,5 +1,6 @@
 package net.magbdigital.sudapractic.controller
 
+import net.magbdigital.sudapractic.dto.PracticeReportDto
 import net.magbdigital.sudapractic.model.*
 import net.magbdigital.sudapractic.service.StudentService
 import net.magbdigital.sudapractic.service.PracticeService
@@ -29,6 +30,11 @@ class PracticeController {
     @GetMapping("/with/estudiante")
     fun listEst(): List<PracticeView>{
         return practiceService.listEstudiante()
+    }
+
+    @GetMapping("/{pacticeId}/fulldata")
+    fun listEst(@PathVariable("pacticeId") pacticeId: Long): PracticeReportDto{
+        return practiceService.listPracticeFullData(pacticeId)
     }
     @PostMapping
     fun save(@RequestBody practice:Practice):Practice{
