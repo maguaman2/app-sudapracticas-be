@@ -97,6 +97,7 @@ CREATE TABLE IF NOT EXISTS activity_detail(
     id serial,
     activities_id int,
     detail_id int,
+    student int,
     PRIMARY KEY (id),
     FOREIGN KEY (activities_id) REFERENCES activity (id),
     FOREIGN KEY (detail_id) REFERENCES practice_detail (id)

@@ -14,5 +14,6 @@ class ActivityDetailView {
     var activitiesId: Long? = null
     @Column(name="detail_id")
     var detailId: Long? = null
+    var student:Long?=null
     var actividad: String? = null
 }

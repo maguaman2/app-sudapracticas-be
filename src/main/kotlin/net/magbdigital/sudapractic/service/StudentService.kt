@@ -2,6 +2,7 @@ package net.magbdigital.sudapractic.service
 
 import net.magbdigital.sudapractic.dto.DatosReporteDto
 import net.magbdigital.sudapractic.dto.DetalleReporteDto
+import net.magbdigital.sudapractic.dto.actividadesDto
 import net.magbdigital.sudapractic.model.*
 import net.magbdigital.sudapractic.repository.*
 import org.springframework.beans.factory.annotation.Autowired
@@ -69,6 +70,7 @@ lateinit var activityDetailViewRepository: ActivityDetailViewRepository
 
         var practiceView: PracticeView = practiceViewRepository.findByStudentIdAndTutorId(idStudent, idTutor)
         var listActivities:List<ActivityDetailView>?=activityDetailViewRepository.listDetailActivity(practiceView.id!!)
+       /* var listActivities:List<ActivityDetailView>?=practiceView.id?.let{activityDetailViewRepository.listDetailActivity(it)}*/
 
 
         var practiceDetail: List<PracticeDetail>? = practiceView.id?.let { practiceDetailRepository.findByPracticeId(it) }
@@ -102,8 +104,15 @@ lateinit var activityDetailViewRepository: ActivityDetailViewRepository
                 datosReporteDto.detalleReporte.add(detalleReporteDto)
             }
         }
+
         if (listActivities != null) {
-            datosReporteDto.listActivities=listActivities
+            listActivities.forEach{listAct->
+                var Actividades=actividadesDto()
+                println(listAct.actividad)
+                Actividades.id=listAct.id
+                Actividades.nombreActividad=listAct.actividad.toString()
+                datosReporteDto.Actividades.add(Actividades)
+            }
         }
         return datosReporteDto
     }

@@ -15,8 +15,7 @@ class DatosReporteDto {
     var anio: String = ""
     var detalleReporte: ArrayList<DetalleReporteDto> = ArrayList();
     var listActivities: List<ActivityDetailView> = ArrayList();
-
-
+    var Actividades:ArrayList<actividadesDto> = ArrayList()
 
 
 }
