@@ -89,31 +89,9 @@ lateinit var activityDetailViewRepository: ActivityDetailViewRepository
         datosReporteDto.inicioSemana = practiceView.startDate?.day.toString()
         datosReporteDto.finSemana = practiceView.endDate?.day.toString()
 
-        if (practiceDetail != null) {
-            simpleDateFormat = SimpleDateFormat("dd-MM-yyyy")
 
-            practiceDetail.forEach { pdetail ->
-                var detalleReporteDto = DetalleReporteDto()
-                println(pdetail.observations)
-                detalleReporteDto.id = pdetail.id
-                detalleReporteDto.fechaDeActividad = simpleDateFormat.format(pdetail.actualDate)
-                detalleReporteDto.horaEntrada = pdetail.startTime.toString()
-                detalleReporteDto.horaSalida = pdetail.endTime.toString()
-                detalleReporteDto.totalHoras = pdetail.totalHours.toString()
-                detalleReporteDto.observacion = pdetail.observations.toString()
-                datosReporteDto.detalleReporte.add(detalleReporteDto)
-            }
-        }
 
-        if (listActivities != null) {
-            listActivities.forEach{listAct->
-                var Actividades=actividadesDto()
-                println(listAct.actividad)
-                Actividades.id=listAct.id
-                Actividades.nombreActividad=listAct.actividad.toString()
-                datosReporteDto.Actividades.add(Actividades)
-            }
-        }
+
         return datosReporteDto
     }
 

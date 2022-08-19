@@ -7,6 +7,7 @@ import net.magbdigital.sudapractic.repository.PracticeRepository
 import net.magbdigital.sudapractic.repository.PracticeViewRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import java.text.SimpleDateFormat
 
 @Service
 class PracticeService {
@@ -42,6 +43,8 @@ class PracticeService {
         return practiceViewRepository.listPracticeByStudent(studentId)
     }
     fun listPracticeFullData (practiceId:Long): PracticeReportDto{
+
+
         val response = PracticeReportDto()
 
         val practice =listById(practiceId)
@@ -51,8 +54,10 @@ class PracticeService {
         val company= companyService.listById(tutor?.companyId)
 
         response.apply {
-            startDate=practice?.startDate.toString()
-            endDate=practice?.endDate.toString()
+            var simpleDateFormat = SimpleDateFormat("LLLL")
+            simpleDateFormat = SimpleDateFormat("dd-MM-yyyy")
+            startDate=simpleDateFormat.format(practice?.startDate).toString()
+            endDate=simpleDateFormat.format(practice?.endDate).toString()
             studentName=student?.name + ' ' +student?.lastname
             careerName=career?.name
             companyName=company?.name

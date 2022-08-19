@@ -6,6 +6,7 @@ import net.magbdigital.sudapractic.model.PracticeDetail
 import net.magbdigital.sudapractic.repository.PracticeDetailRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import java.text.SimpleDateFormat
 
 @Service
 class PracticeDetailService {
@@ -23,13 +24,19 @@ class PracticeDetailService {
     }
     fun listDetailByPracticeToDto (practiceId:Long): List<PracticeDetailDto>{
         val responseDetail =practiceDetailRepository.listDetailByPractice(practiceId)
+        var simpleDateFormat = SimpleDateFormat("LLLL")
+         simpleDateFormat = SimpleDateFormat("dd-MM-yyyy")
+
+
         val response = ArrayList<PracticeDetailDto>()
+
 
         responseDetail.map {
         val itemResponse  =PracticeDetailDto().apply {
-            currentDate=it.actualDate.toString()
+            currentDate=simpleDateFormat.format(it.actualDate).toString()
             startTime=it.startTime.toString()
             endTime=it.endTime.toString()
+            totalHours=it.totalHours.toString()
             observations=it.observations
             activityDetails=  activityDetailService.listActivitiesDetailFull(it.id!!)
 

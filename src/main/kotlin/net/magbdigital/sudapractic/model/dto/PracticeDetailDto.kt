@@ -4,11 +4,11 @@ import net.magbdigital.sudapractic.model.ActivityDetailView
 import java.util.Date
 
 class PracticeDetailDto (
-        var currentDate: String? = null,
-        var startTime: String? = null,
-        var endTime: String? = null,
-        var totalHours: Long? = null,
+        var currentDate: String? = "",
+        var startTime: String? = "",
+        var endTime: String? = "",
+        var totalHours: String? = "",
         var activityDetails: List<ActivityDetailView> = ArrayList(),
-        var observations: String? = null,
+        var observations: String? = "",
 
 )

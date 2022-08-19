@@ -105,3 +105,6 @@ CREATE TABLE IF NOT EXISTS activity_detail(
 
 ALTER TABLE career ADD UNIQUE (teacher_id);
 ALTER TABLE career ADD FOREIGN KEY (teacher_id) REFERENCES teacher(id);
+
+
+
