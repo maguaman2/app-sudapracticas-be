@@ -8,6 +8,9 @@ import net.magbdigital.sudapractic.repository.PracticeViewRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.Date
 
 @Service
 class PracticeService {
@@ -41,6 +44,34 @@ class PracticeService {
     }
     fun listByStudent (studentId:Long): List<PracticeView>{
         return practiceViewRepository.listPracticeByStudent(studentId)
+    }
+
+    fun listWeekPractice (id:Long, dateStart:String, dateEnd:String): PracticeReportDto{
+        val response = PracticeReportDto()
+        val dateStartFormat=dateStart.substring(0,4)+'-'+dateStart.substring(4,6)+'-'+dateStart.substring(6,8)
+        val dateEndFormat=dateEnd.substring(0,4)+'-'+dateEnd.substring(4,6)+'-'+dateEnd.substring(6,8)
+
+        val practice =practiceRepository.listWeekRange(
+            id,
+            LocalDate.parse(dateStartFormat, DateTimeFormatter.ofPattern("yyyy-MM-dd")),
+            LocalDate.parse(dateEndFormat, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+        )
+        val student = studentService.listById(practice?.studentId)
+        val career = carreraService.listById(student?.careerId)
+        val tutor= tutorService.listById(practice?.tutorId)
+        val company= companyService.listById(tutor?.companyId)
+
+        response.apply {
+            var simpleDateFormat = SimpleDateFormat("LLLL")
+            simpleDateFormat = SimpleDateFormat("dd-MM-yyyy")
+            startDate=simpleDateFormat.format(practice?.startDate).toString()
+            endDate=simpleDateFormat.format(practice?.endDate).toString()
+            studentName=student?.name + ' ' +student?.lastname
+            careerName=career?.name
+            companyName=company?.name
+            practiceDetails=practiceDetailService.listDetailByPracticeToDto(id)
+        }
+        return response
     }
     fun listPracticeFullData (practiceId:Long): PracticeReportDto{
 
