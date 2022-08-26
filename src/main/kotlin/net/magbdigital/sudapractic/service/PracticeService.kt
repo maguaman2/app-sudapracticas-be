@@ -49,14 +49,10 @@ class PracticeService {
 
     fun listWeekPractice (id:Long, dateStart:String, dateEnd:String): PracticeReportDto{
         val response = PracticeReportDto()
-        val dateStartFormat=dateStart.substring(0,4)+'-'+dateStart.substring(4,6)+'-'+dateStart.substring(6,8)
-        val dateEndFormat=dateEnd.substring(0,4)+'-'+dateEnd.substring(4,6)+'-'+dateEnd.substring(6,8)
+        val dateStartFormat=LocalDate.parse(dateStart.substring(0,4)+'-'+dateStart.substring(4,6)+'-'+dateStart.substring(6,8))
+        val dateEndFormat=LocalDate.parse(dateEnd.substring(0,4)+'-'+dateEnd.substring(4,6)+'-'+dateEnd.substring(6,8))
 
-        val practice =practiceRepository.listWeekRange(
-            id,
-            LocalDate.parse(dateStartFormat, DateTimeFormatter.ofPattern("yyyy-MM-dd")),
-            LocalDate.parse(dateEndFormat, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
-        )
+        val practice =listById(id)
         val student = studentService.listById(practice?.studentId)
         val career = carreraService.listById(student?.careerId)
         val tutor= tutorService.listById(practice?.tutorId)
@@ -70,34 +66,10 @@ class PracticeService {
             studentName=student?.name + ' ' +student?.lastname
             careerName=career?.name
             companyName=company?.name
-            practiceDetails=practiceDetailService.listDetailByPracticeToDto(id)
+            practiceDetails=practiceDetailService.listDetailByPracticeToDto(id,dateStartFormat,dateEndFormat)
         }
         return response
     }
-    fun listPracticeFullData (practiceId:Long): PracticeReportDto{
-
-
-        val response = PracticeReportDto()
-
-        val practice =listById(practiceId)
-        val student = studentService.listById(practice?.studentId)
-        val career = carreraService.listById(student?.careerId)
-        val tutor= tutorService.listById(practice?.tutorId)
-        val company= companyService.listById(tutor?.companyId)
-
-        response.apply {
-            var simpleDateFormat = SimpleDateFormat("LLLL")
-            simpleDateFormat = SimpleDateFormat("dd-MM-yyyy")
-            startDate=simpleDateFormat.format(practice?.startDate).toString()
-            endDate=simpleDateFormat.format(practice?.endDate).toString()
-            studentName=student?.name + ' ' +student?.lastname
-            careerName=career?.name
-            companyName=company?.name
-            practiceDetails=practiceDetailService.listDetailByPracticeToDto(practiceId)
-        }
-        return response
-    }
-
 
     fun save(practice:Practice):Practice{
         practice.apply { status=true }

@@ -37,10 +37,6 @@ class PracticeController {
         return practiceService.listEstudiante()
     }
 
-    @GetMapping("/{pacticeId}/fulldata")
-    fun listEst(@PathVariable("pacticeId") pacticeId: Long): PracticeReportDto{
-        return practiceService.listPracticeFullData(pacticeId)
-    }
     @PostMapping
     fun save(@RequestBody practice:Practice):Practice{
         return practiceService.save(practice)

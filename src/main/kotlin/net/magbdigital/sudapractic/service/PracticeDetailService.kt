@@ -7,6 +7,7 @@ import net.magbdigital.sudapractic.repository.PracticeDetailRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.text.SimpleDateFormat
+import java.time.LocalDate
 
 @Service
 class PracticeDetailService {
@@ -22,18 +23,12 @@ class PracticeDetailService {
     fun listDetailByPractice (practiceId:Long): List<PracticeDetail>{
         return practiceDetailRepository.listDetailByPractice(practiceId)
     }
-    fun listDetailByPracticeToDto (practiceId:Long): List<PracticeDetailDto>{
-        val responseDetail =practiceDetailRepository.listDetailByPractice(practiceId)
-        var simpleDateFormat = SimpleDateFormat("LLLL")
-         simpleDateFormat = SimpleDateFormat("dd-MM-yyyy")
-
-
+    fun listDetailByPracticeToDto (practiceId:Long,dateStart: LocalDate, endStart: LocalDate): List<PracticeDetailDto>{
+        val responseDetail =practiceDetailRepository.listWeekRange(practiceId,dateStart,endStart)
         val response = ArrayList<PracticeDetailDto>()
-
-
         responseDetail.map {
         val itemResponse  =PracticeDetailDto().apply {
-            currentDate=simpleDateFormat.format(it.actualDate).toString()
+            currentDate=it.actualDate.toString()
             startTime=it.startTime.toString()
             endTime=it.endTime.toString()
             totalHours=it.totalHours.toString()

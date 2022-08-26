@@ -14,7 +14,5 @@ interface PracticeRepository : JpaRepository<Practice, Long?> {
     fun findById(id: Long?): Practice?
 
     fun findByStudentIdAndTutorId(studentId: Long, tutorId: Long): Practice
-    @Query(nativeQuery = true)
-    fun listWeekRange(@Param("id") id:Long, @Param("dateStart")dateStart: LocalDate, @Param("dateEnd")dateEnd: LocalDate): Practice
 
 }
