@@ -6,6 +6,7 @@ import net.magbdigital.sudapractic.service.StudentService
 import net.magbdigital.sudapractic.service.PracticeService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
+import java.util.Date
 
 @RestController
 @RequestMapping("/practices")
@@ -22,6 +23,10 @@ class PracticeController {
     @GetMapping("/{studentId}/student")
     fun listByStudent(@PathVariable("studentId") studentId: Long): List<PracticeView>{
         return practiceService.listByStudent (studentId)
+    }
+    @GetMapping("/{id}/week/{dateStart}/{dateEnd}")
+    fun listByWeek(@PathVariable("id") id: Long,@PathVariable("dateStart") dateStart: String,@PathVariable("dateEnd") dateEnd: String): PracticeReportDto{
+        return practiceService.listWeekPractice (id,dateStart,dateEnd)
     }
     @GetMapping("/{id}")
     fun listById (@PathVariable("id") id: Long): Practice?{
