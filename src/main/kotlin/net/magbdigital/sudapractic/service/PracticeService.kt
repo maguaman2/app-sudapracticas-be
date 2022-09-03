@@ -63,6 +63,7 @@ class PracticeService {
             simpleDateFormat = SimpleDateFormat("dd-MM-yyyy")
             startDate=simpleDateFormat.format(practice?.startDate).toString()
             endDate=simpleDateFormat.format(practice?.endDate).toString()
+            studentNui=student?.nui.toString()
             studentName=student?.name + ' ' +student?.lastname
             careerName=career?.name
             companyName=company?.name

@@ -28,7 +28,9 @@ class PracticeDetailService {
         val response = ArrayList<PracticeDetailDto>()
         responseDetail.map {
         val itemResponse  =PracticeDetailDto().apply {
-            currentDate=it.actualDate.toString()
+            var simpleDateFormat = SimpleDateFormat("LLLL")
+            simpleDateFormat = SimpleDateFormat("dd-MM-yyyy")
+            currentDate=simpleDateFormat.format(it.actualDate).toString()
             startTime=it.startTime.toString()
             endTime=it.endTime.toString()
             totalHours=it.totalHours.toString()

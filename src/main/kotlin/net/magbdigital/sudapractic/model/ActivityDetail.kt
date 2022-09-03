@@ -1,5 +1,6 @@
 package net.magbdigital.sudapractic.model
 
+import java.util.Date
 import javax.persistence.*
 
 @Entity
@@ -15,5 +16,6 @@ class ActivityDetail {
     @Column(name="detail_id")
     var detailId: Long? = null
     var student:Long?=null
+    var act:String?=null
 
 }
