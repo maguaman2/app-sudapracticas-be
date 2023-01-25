@@ -51,8 +51,6 @@ CREATE TABLE IF NOT EXISTS  teacher(
 );
 
 
-
-
 CREATE TABLE IF NOT EXISTS  practice(
   id serial,
   start_date date NOT NULL,
@@ -106,6 +104,26 @@ CREATE TABLE IF NOT EXISTS activity_detail(
 
 ALTER TABLE career ADD UNIQUE (teacher_id);
 ALTER TABLE career ADD FOREIGN KEY (teacher_id) REFERENCES teacher(id);
+
+create table if not exists agreement(
+id serial primary key,
+fecha_inicio date not null,
+fecha_fin date not null,
+status boolean not null,
+company_id int not null,
+teacher_id int not null,
+tutor_id int not null,
+foreign key (company_id) references company(id)
+);
+
+create table if not exists specific_agreement(
+status boolean not null,
+agreement_id int not null,
+career_id int not null,
+foreign key (agreement_id) references agreement(id),
+foreign key (career_id) references career(id)
+);
+
 
 
 
